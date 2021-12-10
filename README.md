@@ -18,7 +18,7 @@ Apache Solr、Apache Flink、Apache Druid、srping-boot-strater-log4j2、dubbo�
 漏洞靶场搭建，网上有搭建好的docker环境漏洞靶场，需要先安装docker环境
 
 docker pull registry.cn-hangzhou.aliyuncs.com/fengxuan/log4j_vuln
- 
+![image](https://github.com/rabbitsafe/Apache-Log4j_RCE/blob/main/1.png) 
 docker run -it -d -p 8888:8080 --name log4j_vuln_container registry.cn-hangzhou.aliyuncs.com/fengxuan/log4j_vuln 
 docker exec -it log4j_vuln_container /bin/bash
 /bin/bash /home/apache-tomcat-8.5.45/bin/startup.sh
